@@ -1,0 +1,20 @@
+# Ignore cache directories
+.cache/
+.local/share/
+
+# Ignore sensitive data
+.ssh/
+.gnupg/
+.password-store/
+
+# Ignore other large/unnecessary stuff
+.mozilla/
+.thunderbird/
+Downloads/
+Documents/
+Pictures/
+Videos/
+Music/
+
+# Ignore end-4 generated files (if any)
+.config/ags/user_options.js
