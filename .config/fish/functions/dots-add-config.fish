@@ -1,8 +1,23 @@
 function dots-add-config
-    set -l config_dirs fastfetch fish hypr kitty quickshell session wlogout
+    set -l config_file "$HOME/.config/fish/dots_config_dirs.txt"
     
+    # Initialize default directories if file doesn't exist
+    if not test -f $config_file
+        printf "fastfetch\nfish\nhypr\nkitty\nquickshell\nsession\nwlogout\n" > $config_file
+    end
+    
+    # Read saved directories
+    set -l config_dirs (cat $config_file)
+    
+    # If arguments provided, add new directories to the list
     if test (count $argv) -gt 0
-        set config_dirs $argv
+        for dir in $argv
+            if not contains $dir $config_dirs
+                echo $dir >> $config_file
+                set config_dirs $config_dirs $dir
+                echo "Added $dir to default directories list."
+            end
+        end
     end
     
     set -l dots_cmd "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

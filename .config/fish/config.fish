@@ -6,8 +6,7 @@ function fish_prompt -d "Write out the prompt"
         (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
 end
 
-if status is-interactive # Commands to run in interactive sessions can go here
-
+if status is-interactive
     # No greeting
     set fish_greeting
 
@@ -17,10 +16,18 @@ if status is-interactive # Commands to run in interactive sessions can go here
         cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
     end
 
-    # Aliases
-    alias pamcan pacman
+    # Aliases from bashrc
     alias ls 'eza --icons'
+    alias grep 'grep --color=auto'
+    alias pamcan pacman
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
     alias q 'qs -c ii'
+    alias dots '/usr/bin/git --git-dir=/home/tlsfbwls/.dotfiles --work-tree=/home/tlsfbwls'
     
 end
+
+# Environment variables from bashrc
+set -gx GOPATH $HOME/.go
+fish_add_path $GOPATH/bin
+
+fish_add_path ~/.local/bin/droid
