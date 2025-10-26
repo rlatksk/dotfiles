@@ -1,5 +1,5 @@
 function dots-push
-    set -l commit_msg "Update dotfiles"
+    set -l commit_msg "dotfiles update"
     
     if test (count $argv) -gt 0
         set commit_msg "$argv"
