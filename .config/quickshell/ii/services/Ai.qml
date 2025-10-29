@@ -258,7 +258,7 @@ Singleton {
         "fiony": aiModelComponent.createObject(this, {
             "name": "Fiony",
             "icon": "google-gemini-symbolic",
-            "description": Translation.tr("Chat assistant without web search"),
+            "description": Translation.tr("Functional Intelligence Optimized Now (for) You"),
             "homepage": "https://openrouter.ai/google/gemini-2.5-flash-lite",
             "endpoint": "https://openrouter.ai/api/v1/chat/completions",
             "model": "google/gemini-2.5-flash-lite",
@@ -271,7 +271,7 @@ Singleton {
         "fiony-online": aiModelComponent.createObject(this, {
             "name": "Fiony (Online)",
             "icon": "google-gemini-symbolic",
-            "description": Translation.tr("Chat assistant with web search capabilities"),
+            "description": Translation.tr("Functional Intelligence Optimized Now (for) You (Online)"),
             "homepage": "https://openrouter.ai/google/gemini-2.5-flash-lite",
             "endpoint": "https://openrouter.ai/api/v1/chat/completions",
             "model": "google/gemini-2.5-flash-lite:online",
