@@ -281,6 +281,32 @@ Singleton {
             "key_get_description": Translation.tr("**Pricing**: Pay-per-use. Data use policy varies depending on your OpenRouter account settings.\n\n**Instructions**: Log into OpenRouter account, go to Keys on the topright menu, click Create API Key"),
             "api_format": "openai",
         }),
+        "unslopnemo-12b": aiModelComponent.createObject(this, {
+            "name": "UnslopNemo 12B",
+            "icon": "ollama-symbolic",
+            "description": Translation.tr("Adventure writing and role-play model by TheDrummer"),
+            "homepage": "https://openrouter.ai/thedrummer/unslopnemo-12b",
+            "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+            "model": "thedrummer/unslopnemo-12b",
+            "requires_key": true,
+            "key_id": "openrouter",
+            "key_get_link": "https://openrouter.ai/settings/keys",
+            "key_get_description": Translation.tr("**Pricing**: Pay-per-use. Data use policy varies depending on your OpenRouter account settings.\n\n**Instructions**: Log into OpenRouter account, go to Keys on the topright menu, click Create API Key"),
+            "api_format": "openai",
+        }),
+        "mistral-nemo": aiModelComponent.createObject(this, {
+            "name": "Mistral Nemo",
+            "icon": "ollama-symbolic",
+            "description": Translation.tr("12B multilingual model with 128K context by Mistral & NVIDIA"),
+            "homepage": "https://openrouter.ai/mistralai/mistral-nemo",
+            "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+            "model": "mistralai/mistral-nemo",
+            "requires_key": true,
+            "key_id": "openrouter",
+            "key_get_link": "https://openrouter.ai/settings/keys",
+            "key_get_description": Translation.tr("**Pricing**: Pay-per-use. Data use policy varies depending on your OpenRouter account settings.\n\n**Instructions**: Log into OpenRouter account, go to Keys on the topright menu, click Create API Key"),
+            "api_format": "openai",
+        }),
     }
     property var modelList: Object.keys(root.models)
     property var currentModelId: Persistent.states?.ai?.model || modelList[0]
