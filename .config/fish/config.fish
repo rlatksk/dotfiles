@@ -31,3 +31,5 @@ set -gx GOPATH $HOME/.go
 fish_add_path $GOPATH/bin
 
 fish_add_path ~/.local/bin/droid
+
+zoxide init fish | source

@@ -23,13 +23,16 @@ libgbinder
 libglibutil
 matugen-bin
 matugen-bin-debug
+mirage
+onlyoffice-bin
 otf-space-grotesk
 paru
 paru-debug
 python-gbinder
 python-inquirerpy
 qt6-avif-image-plugin
-spotify
+spotify-tui-bin
+spotify-tui-bin-debug
 the-honkers-railway-launcher
 ttf-gabarito-git
 ttf-material-symbols-variable-git
@@ -38,8 +41,7 @@ ttf-rubik-vf
 ttf-twemoji
 visual-studio-code-bin
 waydroid
+waydroid-helper
 waydroid-script-git
 wlogout
 wlogout-debug
-yay-bin
-yay-bin-debug
