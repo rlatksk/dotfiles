@@ -1,4 +1,6 @@
 adw-gtk-theme-git
+asdf-vm
+asdf-vm-debug
 breeze-plus
 darkly-bin
 google-breakpad
@@ -21,6 +23,7 @@ illogical-impulse-toolkit
 illogical-impulse-widgets
 libgbinder
 libglibutil
+localsend
 matugen-bin
 matugen-bin-debug
 mirage

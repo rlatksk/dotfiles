@@ -33,3 +33,5 @@ fish_add_path $GOPATH/bin
 fish_add_path ~/.local/bin/droid
 
 zoxide init fish | source
+
+source /usr/share/fish/vendor_completions.d/asdf.fish

@@ -5,6 +5,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PACKAGE_LIST="$SCRIPT_DIR/packages.txt"
 AUR_PACKAGE_LIST="$SCRIPT_DIR/aur_packages.txt"
+FLATPAK_PACKAGE_LIST="$SCRIPT_DIR/flatpak_packages.txt"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -56,20 +57,6 @@ check_paru() {
     fi
 }
 
-check_yay() {
-    if ! command -v yay &> /dev/null; then
-        log_warning "yay AUR helper not found. Installing yay..."
-        sudo pacman -S --needed --noconfirm git base-devel
-        cd /tmp
-        git clone https://aur.archlinux.org/yay-bin.git
-        cd yay-bin
-        makepkg -si --noconfirm
-        cd ..
-        rm -rf yay-bin
-        log_success "yay installed successfully"
-    fi
-}
-
 update_system() {
     log_info "Updating system..."
     sudo pacman -Syu --noconfirm
@@ -113,11 +100,47 @@ install_aur_packages() {
             log_info "AUR package $package is already installed, skipping..."
         else
             log_info "Installing AUR package $package..."
-            yay -S --needed --noconfirm "$package" || log_warning "Failed to install AUR package $package"
+            paru -S --needed --noconfirm "$package" || log_warning "Failed to install AUR package $package"
         fi
     done < "$AUR_PACKAGE_LIST"
     
     log_success "AUR packages installation completed"
+}
+
+check_flatpak() {
+    if ! command -v flatpak &> /dev/null; then
+        log_warning "Flatpak not found. Installing flatpak..."
+        sudo pacman -S --needed --noconfirm flatpak
+        log_success "Flatpak installed successfully"
+        log_info "Adding Flathub repository..."
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        log_success "Flathub repository added"
+    else
+        log_info "Flatpak is already installed"
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    fi
+}
+
+install_flatpak_packages() {
+    if [[ ! -f "$FLATPAK_PACKAGE_LIST" ]]; then
+        log_warning "Flatpak package list not found at $FLATPAK_PACKAGE_LIST. Skipping Flatpak packages."
+        return
+    fi
+
+    log_info "Installing Flatpak packages..."
+    
+    while IFS= read -r package || [[ -n "$package" ]]; do
+        [[ -z "$package" || "$package" =~ ^# ]] && continue
+        
+        if flatpak list --app | grep -q "$package"; then
+            log_info "Flatpak package $package is already installed, skipping..."
+        else
+            log_info "Installing Flatpak package $package..."
+            flatpak install -y flathub "$package" || log_warning "Failed to install Flatpak package $package"
+        fi
+    done < "$FLATPAK_PACKAGE_LIST"
+    
+    log_success "Flatpak packages installation completed"
 }
 
 main() {
@@ -127,9 +150,10 @@ main() {
     check_arch
     update_system
     check_paru
-    check_yay
     install_official_packages
     install_aur_packages
+    check_flatpak
+    install_flatpak_packages
     
     log_success "All packages have been installed successfully!"
     log_info "You may need to reboot your system for all changes to take effect."

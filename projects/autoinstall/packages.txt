@@ -22,12 +22,14 @@ nano
 noto-fonts-cjk
 noto-fonts-emoji
 npm
+obs-studio
 openssh
 openssl-1.1
 os-prober
 pipewire-alsa
 plasma-browser-integration
 plasma-desktop
+qbittorrent
 rclone
 reflector
 sof-firmware
