@@ -1,3 +1,10 @@
+# Auto-start Hyprland on TTY1
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" -eq 1
+        exec Hyprland
+    end
+end
+
 function fish_prompt -d "Write out the prompt"
     # This shows up as USER@HOST /home/user/ >, with the directory colored
     # $USER and $hostname are set by fish, so you can just use them
